@@ -1,0 +1,87 @@
+﻿?<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Загрузить материал</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header"><div class="brand"><div class="logo">З</div><div><div class="title">Загрузить материал</div></div></div><div class="userbox"></div></header>
+
+    <div class="grid">
+      <aside class="sidebar">
+  <nav class="nav">
+    <a href="/dashboard.html">Главная</a>
+    <a href="/classes.html">Классы</a>
+    <a href="/subjects.html">Предметы</a>
+    <a href="/upload.html" data-role="teacher">Загрузить материал</a>
+    <a href="/article-builder.html" data-role="teacher">Конструктор статьи</a>
+    <a href="/test-builder.html" data-role="teacher">Конструктор тестов</a>
+    <a href="/search.html">Поиск материалов</a>
+    <a href="/notifications.html">Уведомления</a>
+    <a href="#" id="logoutLink">Выйти</a>
+  </nav>
+</aside>
+
+      <main class="main">
+        <div class="form" style="max-width:840px">
+          <h2>Загрузить материал</h2>
+          <form id="upload-page-form">
+            <div class="field">
+              <input name="title" class="input" placeholder="Название" required>
+            </div>
+
+            <div class="field">
+              <select name="type" id="upload-type" class="input">
+                <option value="pdf">PDF / Документ</option>
+                <option value="video">Видео (ссылка или файл)</option>
+                <option value="audio">Аудио (файл)</option>
+                <option value="article">Статья (использовать конструктор)</option>
+                <option value="test">Тест (использовать конструктор)</option>
+                <option value="link">Ссылка</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <select name="classId" id="upload-class" class="input"></select>
+            </div>
+
+            <div class="field">
+              <select name="subjectId" id="upload-subject" class="input"></select>
+            </div>
+
+            <div class="field">
+              <input name="topicId" id="upload-topic" class="input" placeholder="ID темы (опционально)">
+            </div>
+
+            <div id="file-area" class="field">
+              <label class="small">Файл (pdf, audio или видео) — опционально</label>
+              <input type="file" name="file" id="upload-file" class="input">
+            </div>
+
+            <div id="url-area" class="field">
+              <input name="url" id="upload-url" class="input" placeholder="Ссылка (например, для видео с YouTube) — опционально">
+            </div>
+
+            <div id="note-area" class="field small">
+              Если вы выберете <b>Статья</b> или <b>Тест</b>, вы будете перенаправлены в соответствующий конструктор.
+            </div>
+
+            <div class="field">
+              <button class="btn" type="submit">Далее / Отправить</button>
+              <a class="btn secondary" id="cancelUpload" href="/dashboard.html" style="margin-left:8px">Отмена</a>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
+
+
+

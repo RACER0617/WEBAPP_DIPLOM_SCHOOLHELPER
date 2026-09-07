@@ -1,0 +1,96 @@
+﻿?<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Конструктор статьи</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    /* доп. правила для редактора */
+    .editor-toolbar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
+    .editor-toolbar button { padding:8px 10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background:#fff; cursor:pointer; }
+    .editor-area { border:1px solid #e6eef8; padding:12px; min-height:260px; border-radius:8px; background: #fff; }
+    .editor-area:focus { outline: 2px solid rgba(79,70,229,0.12); }
+    .toolbar-select { padding:8px;border-radius:8px;border:1px solid #e6eef8;background:#fff }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header"><div class="brand"><div class="logo">КС</div><div><div class="title">Конструктор статьи</div></div></div><div class="userbox"></div></header>
+    <div class="grid">
+      <aside class="sidebar">
+  <nav class="nav">
+    <a href="/dashboard.html">Главная</a>
+    <a href="/classes.html">Классы</a>
+    <a href="/subjects.html">Предметы</a>
+    <a href="/upload.html" data-role="teacher">Загрузить материал</a>
+    <a href="/article-builder.html" data-role="teacher">Конструктор статьи</a>
+    <a href="/test-builder.html" data-role="teacher">Конструктор тестов</a>
+    <a href="/search.html">Поиск материалов</a>
+    <a href="/notifications.html">Уведомления</a>
+    <a href="#" id="logoutLink">Выйти</a>
+  </nav>
+</aside>
+      <main class="main">
+        <div class="form" style="max-width:1000px">
+          <h2>Создать статью</h2>
+          <form id="article-builder-form">
+            <div class="field"><input name="title" id="article-title" class="input" placeholder="Название статьи" required></div>
+
+            <div class="row" style="gap:12px">
+              <div style="flex:1">
+                <select name="classId" id="article-class" class="input"></select>
+              </div>
+              <div style="flex:1">
+                <select name="subjectId" id="article-subject" class="input"></select>
+              </div>
+              <div style="flex:0 0 160px">
+                <input name="topicId" id="article-topic" class="input" placeholder="ID темы (опционально)">
+              </div>
+            </div>
+
+            <div style="margin-top:12px">
+              <div class="editor-toolbar" id="editor-toolbar">
+                <button type="button" data-cmd="bold"><b>B</b></button>
+                <button type="button" data-cmd="italic"><i>I</i></button>
+                <button type="button" data-cmd="underline"><u>U</u></button>
+                <button type="button" data-cmd="justifyLeft"><</button>
+                <button type="button" data-cmd="justifyCenter">-</button>
+                <button type="button" data-cmd="justifyRight">></button>
+                <select id="editor-font-size" class="toolbar-select">
+                  <option value="">Размер шрифта</option>
+                  <option value="14">14px</option>
+                  <option value="16">16px</option>
+                  <option value="18">18px</option>
+                  <option value="20">20px</option>
+                  <option value="24">24px</option>
+                  <option value="28">28px</option>
+                </select>
+                <button type="button" data-cmd="h1">H1</button>
+                <button type="button" data-cmd="h2">H2</button>
+                <button type="button" data-cmd="insertUnorderedList">• List</button>
+                <button type="button" id="editor-link-btn">Link</button>
+                <button type="button" id="editor-image-btn">Image</button>
+                <button type="button" id="editor-video-btn">Video</button>
+              </div>
+
+              <div id="editor" class="editor-area" contenteditable="true">
+                <p>Начните писать текст статьи здесь...</p>
+              </div>
+            </div>
+
+            <div style="margin-top:12px" class="row">
+              <button class="btn" type="submit">Сохранить статью</button>
+              <a class="btn secondary" href="/dashboard.html" style="margin-left:10px">Отмена</a>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
+
+

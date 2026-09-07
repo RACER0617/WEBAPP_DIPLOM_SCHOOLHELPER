@@ -1,0 +1,23 @@
+-- ИЗМИНЕНИЯ БД ДЛЯ НАЗНАЧЕНИЯ ПРЕДМЕТОВ УЧИТЕЛЯМ И НОВОГО КОНСТРУКТОРА ТЕСТОВ (PostgreSQL)
+
+-- 1) Связь учителей и предметов (многие-ко-многим)
+CREATE TABLE IF NOT EXISTS teacher_subjects (
+    teacher_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    subject_id INTEGER NOT NULL REFERENCES subjects(id) ON DELETE CASCADE,
+    PRIMARY KEY (teacher_id, subject_id)
+);
+CREATE INDEX IF NOT EXISTS idx_teacher_subjects_teacher_id ON teacher_subjects(teacher_id);
+CREATE INDEX IF NOT EXISTS idx_teacher_subjects_subject_id ON teacher_subjects(subject_id);
+
+-- 2) Автор материала (чтобы уведомления шли конкретному учителю)
+ALTER TABLE materials
+    ADD COLUMN IF NOT EXISTS teacher_id INTEGER REFERENCES users(id) ON DELETE SET NULL;
+CREATE INDEX IF NOT EXISTS idx_materials_teacher_id ON materials(teacher_id);
+
+-- 3) Расширение вопросов теста (тип вопроса + комментарии)
+ALTER TABLE test_questions
+    ADD COLUMN IF NOT EXISTS question_type VARCHAR(16) NOT NULL DEFAULT 'test',
+    ADD COLUMN IF NOT EXISTS correct_text TEXT,
+    ADD COLUMN IF NOT EXISTS correct_number NUMERIC,
+    ADD COLUMN IF NOT EXISTS correct_comment TEXT,
+    ADD COLUMN IF NOT EXISTS wrong_comment TEXT;

@@ -1,0 +1,33 @@
+﻿-- ИЗМЕНЕНИЯ БД ДЛЯ НОВОГО ФУНКЦИОНАЛА (PostgreSQL)
+
+-- 1) Комментарии к материалам (с поддержкой ответов)
+CREATE TABLE IF NOT EXISTS comments (
+    id SERIAL PRIMARY KEY,
+    material_id INTEGER NOT NULL REFERENCES materials(id) ON DELETE CASCADE,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    parent_comment_id INTEGER NULL REFERENCES comments(id) ON DELETE CASCADE,
+    text TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_comments_material_id ON comments(material_id);
+CREATE INDEX IF NOT EXISTS idx_comments_user_id ON comments(user_id);
+CREATE INDEX IF NOT EXISTS idx_comments_parent_comment_id ON comments(parent_comment_id);
+
+-- 2) Уведомления для учителей и учеников
+CREATE TABLE IF NOT EXISTS notifications (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    type VARCHAR(64) NOT NULL,
+    message TEXT NOT NULL,
+    link TEXT NULL,
+    is_read BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_notifications_user_id ON notifications(user_id);
+CREATE INDEX IF NOT EXISTS idx_notifications_created_at ON notifications(created_at);
+
+-- 3) Комментарий учителя к правильному ответу в тесте
+ALTER TABLE test_answers
+    ADD COLUMN IF NOT EXISTS teacher_comment TEXT;
